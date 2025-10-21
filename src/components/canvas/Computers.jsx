@@ -18,8 +18,8 @@ const Computers = ({ isMobile }) => {
     <mesh>
       <hemisphereLight intensity={0.15} groundColor='black' />
       <spotLight
-        position={[-20, 40, 50]}
-        angle={0.12}
+        position={[-5, 60, 10]}
+        angle={5.12}
         penumbra={1}
         intensity={1}
         castShadow
@@ -41,7 +41,7 @@ const ComputersCanvas = () => {
 
   useEffect(() => {
     // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia("(max-width: 400px)");
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
 
     // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
@@ -65,7 +65,7 @@ const ComputersCanvas = () => {
       frameloop='demand'
       shadows
       dpr={[1, 2]}
-      camera={{ position: [0.1, 1.1, 0.1], fov: 70 }}
+      camera={{ position: [0.1, 0.1, 0.1], fov: 80 }}
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
@@ -74,8 +74,8 @@ const ComputersCanvas = () => {
           enableZoom = {true}
           autoRotate = {true}
           enablePan = {true}
-          maxPolarAngle={Math.PI / 30}
-          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 20}
+          minPolarAngle={Math.PI / 2.5}
         />
         <Computers isMobile={isMobile} />
       </Suspense>
@@ -89,3 +89,4 @@ const ComputersCanvas = () => {
 
 
 export default ComputersCanvas;
+
