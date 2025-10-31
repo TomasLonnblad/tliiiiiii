@@ -1,5 +1,5 @@
-
 import React, { Suspense, useEffect, useState } from "react";
+
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -10,7 +10,7 @@ import CanvasLoader from "../Loader";
 
 
 const Computers = ({ isMobile }) => {
-  const computer = useGLTF("/desktop_pc4/scene.gltf");
+  const computer = useGLTF("/desktop_pc/scene.gltf");
 
 
   
@@ -18,18 +18,18 @@ const Computers = ({ isMobile }) => {
     <mesh>
       <hemisphereLight intensity={0.15} groundColor='black' />
       <spotLight
-        position={[-5, 60, 10]}
+        position={[-20, 80, 10]}
         angle={0.12}
         penumbra={1}
         intensity={1}
         castShadow
-        shadow-mapSize={480}
+        shadow-mapSize={1024}
       />
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
         scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [1.7, -3.25, -2]}
+        position={isMobile ? [0.1, 0.1, -2.2] : [1.7, -2.25, -2]}
         rotation={[-0.01, -0.2, -0.01]}
       />
     </mesh>
@@ -37,11 +37,11 @@ const Computers = ({ isMobile }) => {
 };
 
 const ComputersCanvas = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia("(max-width: 100px)");
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
 
     // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
@@ -64,8 +64,8 @@ const ComputersCanvas = () => {
     <Canvas
       frameloop='demand'
       shadows
-      dpr={[2, 4]}
-      camera={{ position: [0.1, 0.1, 50], fov: 3 }}
+      dpr={[1, 2]}
+      camera={{ position: [1, 1, 0.2], fov: 70 }}
       gl={{ preserveDrawingBuffer: true }}
     >
       <Suspense fallback={<CanvasLoader />}>
@@ -74,8 +74,8 @@ const ComputersCanvas = () => {
           enableZoom = {true}
           autoRotate = {true}
           enablePan = {true}
-          maxPolarAngle={Math.PI / 120}
-          minPolarAngle={Math.PI / 2.5}
+          maxPolarAngle={Math.PI / 30}
+          minPolarAngle={Math.PI / 2}
         />
         <Computers isMobile={isMobile} />
       </Suspense>
@@ -89,4 +89,3 @@ const ComputersCanvas = () => {
 
 
 export default ComputersCanvas;
-
